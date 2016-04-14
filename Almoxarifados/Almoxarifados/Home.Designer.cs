@@ -29,75 +29,76 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+            this.btPesquisar = new System.Windows.Forms.Button();
+            this.dgvMateriais = new System.Windows.Forms.DataGridView();
+            this.btNovoItem = new System.Windows.Forms.Button();
+            this.btEditar = new System.Windows.Forms.Button();
+            this.btDeletar = new System.Windows.Forms.Button();
+            this.btPesquisarTudo = new System.Windows.Forms.Button();
+            this.tbUkey = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btPesquisar
             // 
-            this.button1.Location = new System.Drawing.Point(12, 60);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Pesquisar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btPesquisar.Location = new System.Drawing.Point(12, 43);
+            this.btPesquisar.Name = "btPesquisar";
+            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
+            this.btPesquisar.TabIndex = 0;
+            this.btPesquisar.Text = "Pesquisar";
+            this.btPesquisar.UseVisualStyleBackColor = true;
             // 
-            // dataGrid
+            // dgvMateriais
             // 
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(12, 89);
-            this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(240, 150);
-            this.dataGrid.TabIndex = 1;
+            this.dgvMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMateriais.Location = new System.Drawing.Point(12, 72);
+            this.dgvMateriais.Name = "dgvMateriais";
+            this.dgvMateriais.Size = new System.Drawing.Size(240, 150);
+            this.dgvMateriais.TabIndex = 1;
             // 
-            // button2
+            // btNovoItem
             // 
-            this.button2.Location = new System.Drawing.Point(12, 245);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Novo item";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btNovoItem.Location = new System.Drawing.Point(12, 228);
+            this.btNovoItem.Name = "btNovoItem";
+            this.btNovoItem.Size = new System.Drawing.Size(75, 23);
+            this.btNovoItem.TabIndex = 2;
+            this.btNovoItem.Text = "Novo item";
+            this.btNovoItem.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btEditar
             // 
-            this.button3.Location = new System.Drawing.Point(93, 245);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Editar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btEditar.Location = new System.Drawing.Point(93, 228);
+            this.btEditar.Name = "btEditar";
+            this.btEditar.Size = new System.Drawing.Size(75, 23);
+            this.btEditar.TabIndex = 3;
+            this.btEditar.Text = "Editar";
+            this.btEditar.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btDeletar
             // 
-            this.button4.Location = new System.Drawing.Point(174, 245);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Deletar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btDeletar.Location = new System.Drawing.Point(174, 228);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(75, 23);
+            this.btDeletar.TabIndex = 4;
+            this.btDeletar.Text = "Deletar";
+            this.btDeletar.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btPesquisarTudo
             // 
-            this.button5.Location = new System.Drawing.Point(12, 12);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 34);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Pesquisar tudo";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btPesquisarTudo.Location = new System.Drawing.Point(12, 3);
+            this.btPesquisarTudo.Name = "btPesquisarTudo";
+            this.btPesquisarTudo.Size = new System.Drawing.Size(75, 34);
+            this.btPesquisarTudo.TabIndex = 5;
+            this.btPesquisarTudo.Text = "Pesquisar tudo";
+            this.btPesquisarTudo.UseVisualStyleBackColor = true;
+            this.btPesquisarTudo.Click += new System.EventHandler(this.btPesquisarTudo_Click);
             // 
-            // textBox1
+            // tbUkey
             // 
-            this.textBox1.Location = new System.Drawing.Point(93, 63);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 6;
+            this.tbUkey.Location = new System.Drawing.Point(93, 46);
+            this.tbUkey.Name = "tbUkey";
+            this.tbUkey.Size = new System.Drawing.Size(100, 20);
+            this.tbUkey.TabIndex = 6;
             // 
             // Home
             // 
@@ -106,19 +107,19 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(292, 273);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGrid);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(265, 258);
+            this.Controls.Add(this.tbUkey);
+            this.Controls.Add(this.btPesquisarTudo);
+            this.Controls.Add(this.btDeletar);
+            this.Controls.Add(this.btEditar);
+            this.Controls.Add(this.btNovoItem);
+            this.Controls.Add(this.dgvMateriais);
+            this.Controls.Add(this.btPesquisar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Home";
             this.Text = "Almoxarifados";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,13 +127,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGrid;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btPesquisar;
+        private System.Windows.Forms.DataGridView dgvMateriais;
+        private System.Windows.Forms.Button btNovoItem;
+        private System.Windows.Forms.Button btEditar;
+        private System.Windows.Forms.Button btDeletar;
+        private System.Windows.Forms.Button btPesquisarTudo;
+        private System.Windows.Forms.TextBox tbUkey;
     }
 }
 
