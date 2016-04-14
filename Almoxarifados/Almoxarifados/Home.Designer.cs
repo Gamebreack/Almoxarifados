@@ -47,13 +47,14 @@
             this.btPesquisar.TabIndex = 0;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
             // 
             // dgvMateriais
             // 
             this.dgvMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriais.Location = new System.Drawing.Point(12, 72);
             this.dgvMateriais.Name = "dgvMateriais";
-            this.dgvMateriais.Size = new System.Drawing.Size(240, 150);
+            this.dgvMateriais.Size = new System.Drawing.Size(549, 150);
             this.dgvMateriais.TabIndex = 1;
             // 
             // btNovoItem
@@ -107,7 +108,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(265, 258);
+            this.ClientSize = new System.Drawing.Size(573, 258);
             this.Controls.Add(this.tbUkey);
             this.Controls.Add(this.btPesquisarTudo);
             this.Controls.Add(this.btDeletar);
