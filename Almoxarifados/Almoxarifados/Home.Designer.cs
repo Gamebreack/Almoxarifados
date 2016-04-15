@@ -36,6 +36,7 @@
             this.btDeletar = new System.Windows.Forms.Button();
             this.btPesquisarTudo = new System.Windows.Forms.Button();
             this.tbUkey = new System.Windows.Forms.TextBox();
+            this.btSalvar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             // 
             // dgvMateriais
             // 
+            this.dgvMateriais.AllowUserToAddRows = false;
             this.dgvMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriais.Location = new System.Drawing.Point(12, 72);
             this.dgvMateriais.Name = "dgvMateriais";
@@ -65,6 +67,7 @@
             this.btNovoItem.TabIndex = 2;
             this.btNovoItem.Text = "Novo item";
             this.btNovoItem.UseVisualStyleBackColor = true;
+            this.btNovoItem.Click += new System.EventHandler(this.btNovoItem_Click);
             // 
             // btEditar
             // 
@@ -101,6 +104,16 @@
             this.tbUkey.Size = new System.Drawing.Size(100, 20);
             this.tbUkey.TabIndex = 6;
             // 
+            // btSalvar
+            // 
+            this.btSalvar.Enabled = false;
+            this.btSalvar.Location = new System.Drawing.Point(255, 228);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(75, 23);
+            this.btSalvar.TabIndex = 7;
+            this.btSalvar.Text = "Salvar";
+            this.btSalvar.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,6 +122,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(573, 258);
+            this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.tbUkey);
             this.Controls.Add(this.btPesquisarTudo);
             this.Controls.Add(this.btDeletar);
@@ -135,6 +149,7 @@
         private System.Windows.Forms.Button btDeletar;
         private System.Windows.Forms.Button btPesquisarTudo;
         private System.Windows.Forms.TextBox tbUkey;
+        private System.Windows.Forms.Button btSalvar;
     }
 }
 
