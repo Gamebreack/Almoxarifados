@@ -53,9 +53,11 @@
             // dgvMateriais
             // 
             this.dgvMateriais.AllowUserToAddRows = false;
+            this.dgvMateriais.AllowUserToDeleteRows = false;
             this.dgvMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMateriais.Location = new System.Drawing.Point(12, 72);
             this.dgvMateriais.Name = "dgvMateriais";
+            this.dgvMateriais.ReadOnly = true;
             this.dgvMateriais.Size = new System.Drawing.Size(549, 150);
             this.dgvMateriais.TabIndex = 1;
             // 
@@ -77,6 +79,7 @@
             this.btEditar.TabIndex = 3;
             this.btEditar.Text = "Editar";
             this.btEditar.UseVisualStyleBackColor = true;
+            this.btEditar.Click += new System.EventHandler(this.btEditar_Click);
             // 
             // btDeletar
             // 
@@ -86,6 +89,7 @@
             this.btDeletar.TabIndex = 4;
             this.btDeletar.Text = "Deletar";
             this.btDeletar.UseVisualStyleBackColor = true;
+            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
             // 
             // btPesquisarTudo
             // 
@@ -113,6 +117,7 @@
             this.btSalvar.TabIndex = 7;
             this.btSalvar.Text = "Salvar";
             this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
             // 
             // Home
             // 

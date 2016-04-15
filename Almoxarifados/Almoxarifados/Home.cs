@@ -10,6 +10,7 @@ namespace Almoxarifados
     {
         string connstring = "data source = C:\\Program Files\\Almoxarifado\\Banco de dados\\Almoxarifado.db";
         DB_SQLite Almo_DB = new DB_SQLite();
+        string origemSAVE;
         public Home()
         {
             InitializeComponent();
@@ -48,17 +49,49 @@ namespace Almoxarifados
             dgvMateriais.Columns.Add("Quantidade", "Quantidade");
             dgvMateriais.Columns.Add("Obs", "Observações");
             dgvMateriais.Columns.Add("Ukey", "Código");
-            dgvMateriais.Columns["Ukey"].ReadOnly = true;
             dgvMateriais.Rows.Add();
-            btNovoItem.Enabled = false;
-            btEditar.Enabled = false;
-            btDeletar.Enabled = false;
+            dgvMateriais.ReadOnly = false;
+            //dgvMateriais.Columns["Ukey"].ReadOnly = true;
             Enable_save("NovoItem");
+        }
+
+        private void btDeletar_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Deseja deletar o registro?", "Confirmação", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                Enable_save("Deletar");
+                MessageBox.Show("Registro deletado", "Confirmação");
+            }
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            QueryAdapter(origemSAVE);
+            btSalvar.Enabled = false;
+            btNovoItem.Enabled = true;
+            btEditar.Enabled = true;
+            btDeletar.Enabled = true;
+        }
+
+        private void btEditar_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Enable_save(string origem)
         {
+            btNovoItem.Enabled = false;
+            btEditar.Enabled = false;
+            btDeletar.Enabled = false;
             btSalvar.Enabled = true;
+            origemSAVE = origem;
+        }
+
+        void QueryAdapter(string origem)
+        {
+
+            SQLiteConnection conn = new SQLiteConnection(connstring);
             switch (origem)
             {
                 case "Editar":
@@ -71,6 +104,7 @@ namespace Almoxarifados
                         + "' where ukey = '"
                         + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
                         + "'";
+                    Almo_DB.SQLite_update(updateQuery, conn);
                     break;
 
                 case "NovoItem":
@@ -83,12 +117,14 @@ namespace Almoxarifados
                         + "', '"
                         + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
                         + "');";
+                    Almo_DB.SQLite_insert(insertQuery, conn);
                     break;
 
                 case "Deletar":
                     string deleteQuery = "delete from Materiais where ukey = '"
                         + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
                         + "'";
+                    Almo_DB.SQLite_delete(deleteQuery, conn);
                     break;
             }
         }
