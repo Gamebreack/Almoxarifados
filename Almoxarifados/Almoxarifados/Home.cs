@@ -48,10 +48,10 @@ namespace Almoxarifados
             dgvMateriais.Columns.Add("Material", "Material");
             dgvMateriais.Columns.Add("Quantidade", "Quantidade");
             dgvMateriais.Columns.Add("Obs", "Observações");
-            dgvMateriais.Columns.Add("Ukey", "Código");
+            dgvMateriais.Columns.Add("ukey", "Código");
             dgvMateriais.Rows.Add();
             dgvMateriais.ReadOnly = false;
-            //dgvMateriais.Columns["Ukey"].ReadOnly = true;
+            //dgvMateriais.Columns["ukey"].ReadOnly = true;
             Enable_save("NovoItem");
         }
 
@@ -61,6 +61,7 @@ namespace Almoxarifados
             if (result == DialogResult.Yes)
             {
                 Enable_save("Deletar");
+                btSalvar.PerformClick();
                 MessageBox.Show("Registro deletado", "Confirmação");
             }
         }
@@ -76,7 +77,8 @@ namespace Almoxarifados
 
         private void btEditar_Click(object sender, EventArgs e)
         {
-
+            dgvMateriais.ReadOnly = false;
+            Enable_save("Editar");
         }
 
         private void Enable_save(string origem)
@@ -96,33 +98,33 @@ namespace Almoxarifados
             {
                 case "Editar":
                     string updateQuery = "update Materiais set Material = '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Material"].FormattedValue.ToString()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Material"].FormattedValue.ToString()
                         + "', Quantidade = "
-                        + int.Parse(dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Quantidade"].FormattedValue.ToString())
+                        + int.Parse(dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Quantidade"].FormattedValue.ToString())
                         + ", Obs = '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Obs"].FormattedValue.ToString()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Observações"].FormattedValue.ToString()
                         + "' where ukey = '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim()
                         + "'";
                     Almo_DB.SQLite_update(updateQuery, conn);
                     break;
 
                 case "NovoItem":
                     string insertQuery = "INSERT INTO Materiais(Material, Quantidade, Obs, ukey) VALUES('"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Material"].FormattedValue.ToString()
+                        + dgvMateriais.Rows[0].Cells["Material"].Value.ToString()
                         + "', "
-                        + int.Parse(dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Quantidade"].FormattedValue.ToString())
+                        + int.Parse(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString())
                         + ", '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Obs"].FormattedValue.ToString()
+                        + dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()
                         + "', '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
+                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().Trim()
                         + "');";
                     Almo_DB.SQLite_insert(insertQuery, conn);
                     break;
 
                 case "Deletar":
                     string deleteQuery = "delete from Materiais where ukey = '"
-                        + dgvMateriais.Rows[dgvMateriais.SelectedRows[0].Index].Cells["Ukey"].FormattedValue.ToString().Trim()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim()
                         + "'";
                     Almo_DB.SQLite_delete(deleteQuery, conn);
                     break;
