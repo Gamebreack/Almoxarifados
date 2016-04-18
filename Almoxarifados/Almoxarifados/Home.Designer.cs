@@ -37,16 +37,21 @@
             this.btPesquisarTudo = new System.Windows.Forms.Button();
             this.tbUkey = new System.Windows.Forms.TextBox();
             this.btSalvar = new System.Windows.Forms.Button();
+            this.btCancelar = new System.Windows.Forms.Button();
+            this.btGerar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbBarcode = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btPesquisar
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(12, 43);
+            this.btPesquisar.Location = new System.Drawing.Point(12, 34);
             this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
+            this.btPesquisar.Size = new System.Drawing.Size(121, 23);
             this.btPesquisar.TabIndex = 0;
-            this.btPesquisar.Text = "Pesquisar";
+            this.btPesquisar.Text = "Pesquisar condicional";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
             // 
@@ -55,7 +60,7 @@
             this.dgvMateriais.AllowUserToAddRows = false;
             this.dgvMateriais.AllowUserToDeleteRows = false;
             this.dgvMateriais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMateriais.Location = new System.Drawing.Point(12, 72);
+            this.dgvMateriais.Location = new System.Drawing.Point(12, 63);
             this.dgvMateriais.Name = "dgvMateriais";
             this.dgvMateriais.ReadOnly = true;
             this.dgvMateriais.Size = new System.Drawing.Size(549, 150);
@@ -63,7 +68,7 @@
             // 
             // btNovoItem
             // 
-            this.btNovoItem.Location = new System.Drawing.Point(12, 228);
+            this.btNovoItem.Location = new System.Drawing.Point(12, 219);
             this.btNovoItem.Name = "btNovoItem";
             this.btNovoItem.Size = new System.Drawing.Size(75, 23);
             this.btNovoItem.TabIndex = 2;
@@ -73,7 +78,7 @@
             // 
             // btEditar
             // 
-            this.btEditar.Location = new System.Drawing.Point(93, 228);
+            this.btEditar.Location = new System.Drawing.Point(93, 219);
             this.btEditar.Name = "btEditar";
             this.btEditar.Size = new System.Drawing.Size(75, 23);
             this.btEditar.TabIndex = 3;
@@ -83,7 +88,7 @@
             // 
             // btDeletar
             // 
-            this.btDeletar.Location = new System.Drawing.Point(174, 228);
+            this.btDeletar.Location = new System.Drawing.Point(174, 219);
             this.btDeletar.Name = "btDeletar";
             this.btDeletar.Size = new System.Drawing.Size(75, 23);
             this.btDeletar.TabIndex = 4;
@@ -95,7 +100,7 @@
             // 
             this.btPesquisarTudo.Location = new System.Drawing.Point(12, 3);
             this.btPesquisarTudo.Name = "btPesquisarTudo";
-            this.btPesquisarTudo.Size = new System.Drawing.Size(75, 34);
+            this.btPesquisarTudo.Size = new System.Drawing.Size(121, 23);
             this.btPesquisarTudo.TabIndex = 5;
             this.btPesquisarTudo.Text = "Pesquisar tudo";
             this.btPesquisarTudo.UseVisualStyleBackColor = true;
@@ -103,21 +108,68 @@
             // 
             // tbUkey
             // 
-            this.tbUkey.Location = new System.Drawing.Point(93, 46);
+            this.tbUkey.Location = new System.Drawing.Point(266, 36);
             this.tbUkey.Name = "tbUkey";
-            this.tbUkey.Size = new System.Drawing.Size(100, 20);
+            this.tbUkey.Size = new System.Drawing.Size(121, 20);
             this.tbUkey.TabIndex = 6;
             // 
             // btSalvar
             // 
             this.btSalvar.Enabled = false;
-            this.btSalvar.Location = new System.Drawing.Point(255, 228);
+            this.btSalvar.Location = new System.Drawing.Point(255, 219);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(75, 23);
             this.btSalvar.TabIndex = 7;
             this.btSalvar.Text = "Salvar";
             this.btSalvar.UseVisualStyleBackColor = true;
             this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
+            // 
+            // btCancelar
+            // 
+            this.btCancelar.Enabled = false;
+            this.btCancelar.Location = new System.Drawing.Point(336, 219);
+            this.btCancelar.Name = "btCancelar";
+            this.btCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btCancelar.TabIndex = 8;
+            this.btCancelar.Text = "Cancelar";
+            this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.btCancelar_Click);
+            // 
+            // btGerar
+            // 
+            this.btGerar.Location = new System.Drawing.Point(466, 219);
+            this.btGerar.Name = "btGerar";
+            this.btGerar.Size = new System.Drawing.Size(95, 23);
+            this.btGerar.TabIndex = 9;
+            this.btGerar.Text = "Gerar código";
+            this.btGerar.UseVisualStyleBackColor = true;
+            this.btGerar.Click += new System.EventHandler(this.btGerar_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(441, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(120, 54);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
+            // 
+            // cbBarcode
+            // 
+            this.cbBarcode.FormattingEnabled = true;
+            this.cbBarcode.Items.AddRange(new object[] {
+            "Material",
+            "Quantidade",
+            "Observações",
+            "Mapeamento",
+            "Código"});
+            this.cbBarcode.Location = new System.Drawing.Point(139, 36);
+            this.cbBarcode.Name = "cbBarcode";
+            this.cbBarcode.Size = new System.Drawing.Size(121, 21);
+            this.cbBarcode.TabIndex = 11;
+            this.cbBarcode.Text = "Categorias";
             // 
             // Home
             // 
@@ -126,7 +178,11 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(573, 258);
+            this.ClientSize = new System.Drawing.Size(573, 248);
+            this.Controls.Add(this.cbBarcode);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btGerar);
+            this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.tbUkey);
             this.Controls.Add(this.btPesquisarTudo);
@@ -140,6 +196,7 @@
             this.Name = "Home";
             this.Text = "Almoxarifados";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,6 +212,10 @@
         private System.Windows.Forms.Button btPesquisarTudo;
         private System.Windows.Forms.TextBox tbUkey;
         private System.Windows.Forms.Button btSalvar;
+        private System.Windows.Forms.Button btCancelar;
+        private System.Windows.Forms.Button btGerar;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox cbBarcode;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
@@ -21,7 +22,7 @@ namespace Almoxarifados
             dgvMateriais.DataSource = null;
             dgvMateriais.Rows.Clear();
             dgvMateriais.Columns.Clear();
-            string query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.ukey as Código from Materiais";
+            string query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais";
             SQLiteConnection conn = new SQLiteConnection(connstring);
             DataSet ds = Almo_DB.SQLite_select(query, conn);
             dgvMateriais.DataSource = ds.Tables[0];
@@ -30,14 +31,45 @@ namespace Almoxarifados
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            dgvMateriais.DataSource = null;
-            dgvMateriais.Rows.Clear();
-            dgvMateriais.Columns.Clear();
-            string query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.ukey as Código from Materiais where Materiais.ukey = '" + tbUkey.Text.Trim().ToUpper() + "'";
-            SQLiteConnection conn = new SQLiteConnection(connstring);
-            DataSet ds = Almo_DB.SQLite_select(query, conn);
-            dgvMateriais.DataSource = ds.Tables[0];
-            dgvMateriais.Refresh();
+            if (cbBarcode.SelectedIndex > -1)
+            {
+                dgvMateriais.DataSource = null;
+                dgvMateriais.Rows.Clear();
+                dgvMateriais.Columns.Clear();
+                string pesquisa = null;
+                string query = null;
+                switch (cbBarcode.SelectedIndex)
+                {
+                    case 0:
+                        pesquisa = "Material";
+                        query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim() + "'";
+                        break;
+                    case 1:
+                        pesquisa = "Quantidade";
+                        query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        break;
+                    case 2:
+                        pesquisa = "Obs";
+                        query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim() + "'";
+                        break;
+                    case 3:
+                        pesquisa = "Mapeamento";
+                        query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        break;
+                    case 4:
+                        pesquisa = "ukey";
+                        query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        break;
+                }
+                SQLiteConnection conn = new SQLiteConnection(connstring);
+                DataSet ds = Almo_DB.SQLite_select(query, conn);
+                dgvMateriais.DataSource = ds.Tables[0];
+                dgvMateriais.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma categoria para a busca", "Atenção");
+            }
         }
 
         private void btNovoItem_Click(object sender, EventArgs e)
@@ -48,6 +80,7 @@ namespace Almoxarifados
             dgvMateriais.Columns.Add("Material", "Material");
             dgvMateriais.Columns.Add("Quantidade", "Quantidade");
             dgvMateriais.Columns.Add("Obs", "Observações");
+            dgvMateriais.Columns.Add("Mapeamento", "Mapeamento");
             dgvMateriais.Columns.Add("ukey", "Código");
             dgvMateriais.Rows.Add();
             dgvMateriais.ReadOnly = false;
@@ -57,12 +90,19 @@ namespace Almoxarifados
 
         private void btDeletar_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Deseja deletar o registro?", "Confirmação", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
+            if (dgvMateriais.Rows.Count > 0)
             {
-                Enable_save("Deletar");
-                btSalvar.PerformClick();
-                MessageBox.Show("Registro deletado", "Confirmação");
+                DialogResult result = MessageBox.Show("Deseja deletar o registro?", "Confirmação", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Enable_save("Deletar");
+                    btSalvar.PerformClick();
+                    MessageBox.Show("Registro deletado", "Confirmação");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um registro para deletar", "Atenção");
             }
         }
 
@@ -70,15 +110,50 @@ namespace Almoxarifados
         {
             QueryAdapter(origemSAVE);
             btSalvar.Enabled = false;
+            btCancelar.Enabled = false;
             btNovoItem.Enabled = true;
             btEditar.Enabled = true;
             btDeletar.Enabled = true;
+            dgvMateriais.ReadOnly = true;
         }
 
         private void btEditar_Click(object sender, EventArgs e)
         {
-            dgvMateriais.ReadOnly = false;
-            Enable_save("Editar");
+            if (dgvMateriais.Rows.Count > 0)
+            {
+                dgvMateriais.ReadOnly = false;
+                Enable_save("Editar");
+            }
+            else
+            {
+                MessageBox.Show("Selecione um registro para editar", "Atenção");
+            }
+        }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+            btNovoItem.Enabled = true;
+            btEditar.Enabled = true;
+            btDeletar.Enabled = true;
+            btSalvar.Enabled = false;
+            btCancelar.Enabled = false;
+            dgvMateriais.ReadOnly = true;
+            origemSAVE = null;
+        }
+
+        private void btGerar_Click(object sender, EventArgs e)
+        {
+            if (dgvMateriais.Rows.Count > 0)
+            {
+                string url = "http://www.barcode-generator.de/Generate_Barcode?type=code128&msg="
+                    + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim()
+                    + "&height=10&mw=0.20&hrp=bottom&hrsize=1.2mm&res=300&target=1&print=0";
+                System.Diagnostics.Process.Start(url);
+            }
+            else
+            {
+                MessageBox.Show("Selecione um registro para gerar o código", "Atenção");
+            }
         }
 
         private void Enable_save(string origem)
@@ -87,6 +162,7 @@ namespace Almoxarifados
             btEditar.Enabled = false;
             btDeletar.Enabled = false;
             btSalvar.Enabled = true;
+            btCancelar.Enabled = true;
             origemSAVE = origem;
         }
 
@@ -103,6 +179,8 @@ namespace Almoxarifados
                         + int.Parse(dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Quantidade"].FormattedValue.ToString())
                         + ", Obs = '"
                         + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Observações"].FormattedValue.ToString()
+                        + "', Mapeamento = '"
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Mapeamento"].Value.ToString()
                         + "' where ukey = '"
                         + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim()
                         + "'";
@@ -110,12 +188,14 @@ namespace Almoxarifados
                     break;
 
                 case "NovoItem":
-                    string insertQuery = "INSERT INTO Materiais(Material, Quantidade, Obs, ukey) VALUES('"
+                    string insertQuery = "INSERT INTO Materiais(Material, Quantidade, Obs, Mapeamento, ukey) VALUES('"
                         + dgvMateriais.Rows[0].Cells["Material"].Value.ToString()
                         + "', "
                         + int.Parse(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString())
                         + ", '"
                         + dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()
+                        + "', '"
+                        + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString()
                         + "', '"
                         + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().Trim()
                         + "');";
