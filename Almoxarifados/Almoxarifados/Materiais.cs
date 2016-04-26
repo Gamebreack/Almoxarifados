@@ -131,10 +131,14 @@ namespace Almoxarifados
             QueryAdapter(origemSAVE);
             btSalvar.Enabled = false;
             btCancelar.Enabled = false;
+            btGerar.Enabled = true;
+            btPesquisar.Enabled = true;
+            btPesquisarTudo.Enabled = true;
             btNovoItem.Enabled = true;
             btEditar.Enabled = true;
             btDeletar.Enabled = true;
             dgvMateriais.ReadOnly = true;
+            origemSAVE = null;
         }
 
         private void btEditar_Click(object sender, EventArgs e)
@@ -155,6 +159,9 @@ namespace Almoxarifados
             btNovoItem.Enabled = true;
             btEditar.Enabled = true;
             btDeletar.Enabled = true;
+            btPesquisar.Enabled = true;
+            btPesquisarTudo.Enabled = true;
+            btGerar.Enabled = true;
             btSalvar.Enabled = false;
             btCancelar.Enabled = false;
             dgvMateriais.ReadOnly = true;
@@ -181,6 +188,9 @@ namespace Almoxarifados
             btNovoItem.Enabled = false;
             btEditar.Enabled = false;
             btDeletar.Enabled = false;
+            btPesquisar.Enabled = false;
+            btPesquisarTudo.Enabled = false;
+            btGerar.Enabled = false;
             btSalvar.Enabled = true;
             btCancelar.Enabled = true;
             origemSAVE = origem;
