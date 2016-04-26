@@ -1,6 +1,6 @@
 ﻿namespace Almoxarifados
 {
-    partial class Home
+    partial class Materiais
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Materiais));
             this.btPesquisar = new System.Windows.Forms.Button();
             this.dgvMateriais = new System.Windows.Forms.DataGridView();
             this.btNovoItem = new System.Windows.Forms.Button();
@@ -39,10 +39,11 @@
             this.btSalvar = new System.Windows.Forms.Button();
             this.btCancelar = new System.Windows.Forms.Button();
             this.btGerar = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.cbBarcode = new System.Windows.Forms.ComboBox();
+            this.cbPesquisa = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btPesquisar
@@ -145,16 +146,17 @@
             this.btGerar.UseVisualStyleBackColor = true;
             this.btGerar.Click += new System.EventHandler(this.btGerar_Click);
             // 
-            // pictureBox1
+            // pbLogo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(441, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(120, 54);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.WaitOnLoad = true;
+            this.pbLogo.Enabled = false;
+            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
+            this.pbLogo.Location = new System.Drawing.Point(441, 3);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(120, 54);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogo.TabIndex = 10;
+            this.pbLogo.TabStop = false;
+            this.pbLogo.WaitOnLoad = true;
             // 
             // cbBarcode
             // 
@@ -171,7 +173,17 @@
             this.cbBarcode.TabIndex = 11;
             this.cbBarcode.Text = "Categorias";
             // 
-            // Home
+            // cbPesquisa
+            // 
+            this.cbPesquisa.AutoSize = true;
+            this.cbPesquisa.Location = new System.Drawing.Point(266, 13);
+            this.cbPesquisa.Name = "cbPesquisa";
+            this.cbPesquisa.Size = new System.Drawing.Size(62, 17);
+            this.cbPesquisa.TabIndex = 12;
+            this.cbPesquisa.Text = "Contém";
+            this.cbPesquisa.UseVisualStyleBackColor = true;
+            // 
+            // Materiais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -179,8 +191,9 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(573, 248);
+            this.Controls.Add(this.cbPesquisa);
             this.Controls.Add(this.cbBarcode);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.btGerar);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btSalvar);
@@ -193,10 +206,10 @@
             this.Controls.Add(this.btPesquisar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Home";
-            this.Text = "Almoxarifados";
+            this.Name = "Materiais";
+            this.Text = "Materiais";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,8 +227,9 @@
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.Button btGerar;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.ComboBox cbBarcode;
+        private System.Windows.Forms.CheckBox cbPesquisa;
     }
 }
 

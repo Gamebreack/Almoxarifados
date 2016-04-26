@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
@@ -7,12 +6,12 @@ using DB_Classes;
 
 namespace Almoxarifados
 {
-    public partial class Home : Form
+    public partial class Materiais : Form
     {
         string connstring = "data source = C:\\Program Files\\Almoxarifado\\Banco de dados\\Almoxarifado.db";
         DB_SQLite Almo_DB = new DB_SQLite();
         string origemSAVE;
-        public Home()
+        public Materiais()
         {
             InitializeComponent();
         }
@@ -43,22 +42,43 @@ namespace Almoxarifados
                     case 0:
                         pesquisa = "Material";
                         query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim() + "'";
+                        if (cbPesquisa.Checked)
+                        {
+                            query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " like '%" + tbUkey.Text.Trim() + "%'";
+                        }
                         break;
                     case 1:
                         pesquisa = "Quantidade";
                         query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        if (cbPesquisa.Checked)
+                        {
+
+                            query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " like '%" + tbUkey.Text.Trim().ToUpper() + "%'";
+                        }
                         break;
                     case 2:
                         pesquisa = "Obs";
                         query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim() + "'";
+                        if (cbPesquisa.Checked)
+                        {
+                            query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " like '%" + tbUkey.Text.Trim() + "%'";
+                        }
                         break;
                     case 3:
                         pesquisa = "Mapeamento";
                         query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        if (cbPesquisa.Checked)
+                        {
+                            query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " like '%" + tbUkey.Text.Trim().ToUpper() + "%'";
+                        }
                         break;
                     case 4:
                         pesquisa = "ukey";
                         query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " = '" + tbUkey.Text.Trim().ToUpper() + "'";
+                        if (cbPesquisa.Checked)
+                        {
+                            query = "select Materiais.Material, Materiais.Quantidade, Materiais.Obs as Observações, Materiais.Mapeamento, Materiais.ukey as Código from Materiais where Materiais." + pesquisa + " like '%" + tbUkey.Text.Trim().ToUpper() + "%'";
+                        }
                         break;
                 }
                 SQLiteConnection conn = new SQLiteConnection(connstring);
@@ -178,11 +198,11 @@ namespace Almoxarifados
                         + "', Quantidade = "
                         + int.Parse(dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Quantidade"].FormattedValue.ToString())
                         + ", Obs = '"
-                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Observações"].FormattedValue.ToString()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Observações"].FormattedValue.ToString().ToUpper()
                         + "', Mapeamento = '"
                         + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Mapeamento"].Value.ToString()
                         + "' where ukey = '"
-                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim()
+                        + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim().ToUpper()
                         + "'";
                     Almo_DB.SQLite_update(updateQuery, conn);
                     break;
@@ -195,9 +215,9 @@ namespace Almoxarifados
                         + ", '"
                         + dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()
                         + "', '"
-                        + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString()
+                        + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString().ToUpper()
                         + "', '"
-                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().Trim()
+                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().Trim().ToUpper()
                         + "');";
                     Almo_DB.SQLite_insert(insertQuery, conn);
                     break;
