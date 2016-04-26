@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almoxarifados", "Almoxarifados\Almoxarifados.csproj", "{F9405048-D62C-4E75-90BC-5532D7274C6F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Materiais Setup", "Materiais Setup\Materiais Setup.vdproj", "{92982123-2194-4EF9-B8D2-CF595F6DA736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{F9405048-D62C-4E75-90BC-5532D7274C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9405048-D62C-4E75-90BC-5532D7274C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9405048-D62C-4E75-90BC-5532D7274C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92982123-2194-4EF9-B8D2-CF595F6DA736}.Debug|Any CPU.ActiveCfg = Debug
+		{92982123-2194-4EF9-B8D2-CF595F6DA736}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

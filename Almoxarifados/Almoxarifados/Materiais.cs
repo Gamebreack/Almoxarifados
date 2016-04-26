@@ -104,7 +104,9 @@ namespace Almoxarifados
             dgvMateriais.Columns.Add("ukey", "Código");
             dgvMateriais.Rows.Add();
             dgvMateriais.ReadOnly = false;
-            //dgvMateriais.Columns["ukey"].ReadOnly = true;
+            SQLiteConnection conn = new SQLiteConnection(connstring);
+            dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["ukey"].Value = ukeygen(conn);
+            dgvMateriais.Columns["ukey"].ReadOnly = true;
             Enable_save("NovoItem");
         }
 
@@ -146,6 +148,7 @@ namespace Almoxarifados
             if (dgvMateriais.Rows.Count > 0)
             {
                 dgvMateriais.ReadOnly = false;
+                dgvMateriais.Columns["ukey"].ReadOnly = true;
                 Enable_save("Editar");
             }
             else
@@ -227,7 +230,7 @@ namespace Almoxarifados
                         + "', '"
                         + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString().ToUpper()
                         + "', '"
-                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().Trim().ToUpper()
+                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().ToUpper()
                         + "');";
                     Almo_DB.SQLite_insert(insertQuery, conn);
                     break;
@@ -244,6 +247,17 @@ namespace Almoxarifados
         void dgvMateriais_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             dgvMateriais.Rows[e.RowIndex].ErrorText = String.Empty;
+        }
+
+        String ukeygen(SQLiteConnection con)
+        {
+            SQLiteConnection conn = con;
+            String ukey = "LAB";
+            String Querry = "select MAX(substr(ukey,4,6)) as ukey from Materiais";
+            DataSet dsUkey = Almo_DB.SQLite_select(Querry, conn);
+            int max = (Convert.ToInt32(dsUkey.Tables[0].Rows[0][0]) + 1);
+            ukey += max.ToString().PadLeft(6,'0').ToUpper();
+            return ukey;
         }
     }
 }
