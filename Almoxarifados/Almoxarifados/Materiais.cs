@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Drawing;
 using DB_Classes;
 
 namespace Almoxarifados
@@ -148,7 +149,7 @@ namespace Almoxarifados
             if (dgvMateriais.Rows.Count > 0)
             {
                 dgvMateriais.ReadOnly = false;
-                dgvMateriais.Columns["ukey"].ReadOnly = true;
+                dgvMateriais.Columns["Código"].ReadOnly = true;
                 Enable_save("Editar");
             }
             else
@@ -186,6 +187,11 @@ namespace Almoxarifados
             }
         }
 
+        private void btImprimir_Click(object sender, EventArgs e)
+        {
+            pdGrid.Print();
+        }
+
         private void Enable_save(string origem)
         {
             btNovoItem.Enabled = false;
@@ -206,7 +212,31 @@ namespace Almoxarifados
             switch (origem)
             {
                 case "Editar":
-                    string updateQuery = "update Materiais set Material = '"
+                    if (string.IsNullOrEmpty(dgvMateriais.Rows[0].Cells["Material"].Value.ToString()))
+                    {
+                        MessageBox.Show("O campo Material não pode ser nulo", "Atenção");
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString()))
+                        {
+                            MessageBox.Show("O campo Quantidade não pode ser nulo", "Atenção");
+                        }
+                        else
+                        {
+                            if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Observações"].Value.ToString()))
+                            {
+                                MessageBox.Show("O campo Observações não pode ser nulo", "Atenção");
+                            }
+                            else
+                            {
+                                if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString()))
+                                {
+                                    MessageBox.Show("O campo Mapeamento não pode ser nulo", "Atenção");
+                                }
+                                else
+                                {
+                                    string updateQuery = "update Materiais set Material = '"
                         + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Material"].FormattedValue.ToString()
                         + "', Quantidade = "
                         + int.Parse(dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Quantidade"].FormattedValue.ToString())
@@ -217,22 +247,54 @@ namespace Almoxarifados
                         + "' where ukey = '"
                         + dgvMateriais.Rows[dgvMateriais.CurrentCell.RowIndex].Cells["Código"].FormattedValue.ToString().Trim().ToUpper()
                         + "'";
-                    Almo_DB.SQLite_update(updateQuery, conn);
+                                    Almo_DB.SQLite_update(updateQuery, conn);
+                                }
+                            }
+                        }
+                    }
                     break;
 
                 case "NovoItem":
-                    string insertQuery = "INSERT INTO Materiais(Material, Quantidade, Obs, Mapeamento, ukey) VALUES('"
-                        + dgvMateriais.Rows[0].Cells["Material"].Value.ToString()
-                        + "', "
-                        + int.Parse(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString())
-                        + ", '"
-                        + dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()
-                        + "', '"
-                        + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString().ToUpper()
-                        + "', '"
-                        + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().ToUpper()
-                        + "');";
-                    Almo_DB.SQLite_insert(insertQuery, conn);
+                    if (string.IsNullOrEmpty(dgvMateriais.Rows[0].Cells["Material"].Value.ToString()))
+                    {
+                        MessageBox.Show("O campo Material não pode ser nulo", "Atenção");
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString()))
+                        {
+                            MessageBox.Show("O campo Quantidade não pode ser nulo", "Atenção");
+                        }
+                        else
+                        {
+                            if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()))
+                            {
+                                MessageBox.Show("O campo Observações não pode ser nulo", "Atenção");
+                            }
+                            else
+                            {
+                                if (string.IsNullOrWhiteSpace(dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString()))
+                                {
+                                    MessageBox.Show("O campo Mapeamento não pode ser nulo", "Atenção");
+                                }
+                                else
+                                {
+                                    string insertQuery = "INSERT INTO Materiais(Material, Quantidade, Obs, Mapeamento, ukey) VALUES('"
+                                + dgvMateriais.Rows[0].Cells["Material"].Value.ToString()
+                                + "', "
+                                + int.Parse(dgvMateriais.Rows[0].Cells["Quantidade"].Value.ToString())
+                                + ", '"
+                                + dgvMateriais.Rows[0].Cells["Obs"].Value.ToString()
+                                + "', '"
+                                + dgvMateriais.Rows[0].Cells["Mapeamento"].Value.ToString().ToUpper()
+                                + "', '"
+                                + dgvMateriais.Rows[0].Cells["ukey"].Value.ToString().ToUpper()
+                                + "');";
+                                    Almo_DB.SQLite_insert(insertQuery, conn);
+                                }
+                            }
+                        }
+                    }
                     break;
 
                 case "Deletar":
@@ -255,9 +317,30 @@ namespace Almoxarifados
             String ukey = "LAB";
             String Querry = "select MAX(substr(ukey,4,6)) as ukey from Materiais";
             DataSet dsUkey = Almo_DB.SQLite_select(Querry, conn);
-            int max = (Convert.ToInt32(dsUkey.Tables[0].Rows[0][0]) + 1);
-            ukey += max.ToString().PadLeft(6,'0').ToUpper();
+            int max = (Convert.ToInt16(dsUkey.Tables[0].Rows[0][0]) + 1);
+            ukey += max.ToString().PadLeft(6, '0').ToUpper();
             return ukey;
+        }
+
+        private void pdGrid_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            //int widthMaterial = dgvMateriais.Columns["Material"].Width;
+            //int widthQuantidade = dgvMateriais.Columns["Quantidade"].Width;
+            //int widthObservações = dgvMateriais.Columns["Observações"].Width;
+            //int widthMapeamento = dgvMateriais.Columns["Mapeamento"].Width;
+            //int widthCodigo = dgvMateriais.Columns["Código"].Width;
+            //int height = dgvMateriais.Rows[0].Height;
+
+            //if (height > e.MarginBounds.Height)
+            //{
+            //    height = x;
+            //    width = y;
+            //    e.HasMorePages = true;
+            //}
+
+            Bitmap bm = new Bitmap(dgvMateriais.Width, dgvMateriais.Height);
+            dgvMateriais.DrawToBitmap(bm, new Rectangle(0, 0, dgvMateriais.Width, dgvMateriais.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
         }
     }
 }

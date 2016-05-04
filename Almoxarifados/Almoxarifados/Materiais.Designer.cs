@@ -42,6 +42,8 @@
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.cbBarcode = new System.Windows.Forms.ComboBox();
             this.cbPesquisa = new System.Windows.Forms.CheckBox();
+            this.pdGrid = new System.Drawing.Printing.PrintDocument();
+            this.btImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriais)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
@@ -183,6 +185,20 @@
             this.cbPesquisa.Text = "Contém";
             this.cbPesquisa.UseVisualStyleBackColor = true;
             // 
+            // pdGrid
+            // 
+            this.pdGrid.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pdGrid_PrintPage);
+            // 
+            // btImprimir
+            // 
+            this.btImprimir.Location = new System.Drawing.Point(139, 3);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(121, 23);
+            this.btImprimir.TabIndex = 13;
+            this.btImprimir.Text = "Imprimir";
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.btImprimir_Click);
+            // 
             // Materiais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,6 +207,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(573, 248);
+            this.Controls.Add(this.btImprimir);
             this.Controls.Add(this.cbPesquisa);
             this.Controls.Add(this.cbBarcode);
             this.Controls.Add(this.pbLogo);
@@ -230,6 +247,8 @@
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.ComboBox cbBarcode;
         private System.Windows.Forms.CheckBox cbPesquisa;
+        private System.Drawing.Printing.PrintDocument pdGrid;
+        private System.Windows.Forms.Button btImprimir;
     }
 }
 
